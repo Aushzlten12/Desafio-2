@@ -4,3 +4,4 @@ Thumbs.db
 
 # Entornos locales de docker 
 postgres_data/
+.env

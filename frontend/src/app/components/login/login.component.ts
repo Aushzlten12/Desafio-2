@@ -25,7 +25,7 @@ export class LoginComponent {
       next: (resp) => {
         console.log('Login OK:', resp);
         localStorage.setItem('token', resp.access); // Guardamos el token
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.error(err);

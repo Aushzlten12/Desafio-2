@@ -5,6 +5,7 @@ import { PersonListComponent } from './components/person-list/person-list.compon
 import { PersonFormComponent } from './components/person-form/person-form.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { authGuard } from './guards/auth.guard';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
@@ -15,13 +16,14 @@ export const routes: Routes = [
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'persons', component: PersonListComponent },
       { path: 'persons/new', component: PersonFormComponent },
       { path: 'persons/:id/edit', component: PersonFormComponent },
       { path: 'products', component: ProductListComponent },
       { path: 'products/new', component: ProductFormComponent },
       { path: 'products/:id/edit', component: ProductFormComponent },
-      { path: '', redirectTo: 'persons', pathMatch: 'full' }
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },
   { path: '**', redirectTo: 'persons' }

@@ -1,0 +1,42 @@
+<div class="container fade-in">
+  <h2 class="mb-4">Resumen del Sistema</h2>
+
+  <div class="row" *ngIf="!isLoading; else loading">
+    <div class="col-md-6 mb-4">
+      <div class="card h-100 border-primary shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title text-primary">Personas Registradas</h5>
+          <h1 class="display-1 fw-bold">{{ totalPersons }}</h1>
+          <p class="card-text text-muted">
+            Clientes o usuarios activos en la base de datos.
+          </p>
+          <a routerLink="/persons" class="btn btn-primary">
+            Ver Listado <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card h-100 border-success shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title text-success">Productos en Inventario</h5>
+          <h1 class="display-1 fw-bold">{{ totalProducts }}</h1>
+          <p class="card-text text-muted">Total de artículos disponibles.</p>
+          <a routerLink="/products" class="btn btn-success">
+            Gestionar Productos <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="text-center mt-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p>Calculando estadísticas...</p>
+    </div>
+  </ng-template>
+</div>

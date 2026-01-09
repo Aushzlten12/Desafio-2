@@ -28,25 +28,27 @@ Antes de iniciar, crea un archivo `.env` en la raíz de esta carpeta con el sigu
 
 ```env
 # --- Django Core ---
-# En desarrollo usamos 'dev', en producción cambiar a 'core.settings.prod'
+# 'dev' para local con debug, 'prod' para despliegue seguro
 DJANGO_SETTINGS_MODULE=core.settings.dev
 SECRET_KEY=django-insecure-clave-secreta-local-dev
 DEBUG=True
 ALLOWED_HOSTS=*
-CORS_ALLOWED_ORIGINS=http://localhost:4200
+
+# CORS: Importante agregar los orígenes del Frontend (Docker y Local)
+CORS_ALLOWED_ORIGINS=http://localhost,http://localhost:4200,http://localhost:8080
 JWT_ACCESS_TTL_MIN=60
 
 # --- Base de Datos (PostgreSQL) ---
 POSTGRES_DB=app_db
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=password_seguro_123
-# 'db' es el nombre del servicio en docker-compose
+
+# 'db' es el nombre del servicio definido en el docker-compose.yml
 DB_HOST=db
 DB_PORT=5432
 
 # --- Configuración Extra ---
-LOG_LEVEL=INFO
-```
+LOG_LEVEL=INFO```
 
 ## Ejecución (Comandos Rápidos)
 
