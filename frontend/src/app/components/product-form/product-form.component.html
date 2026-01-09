@@ -1,0 +1,107 @@
+<div class="container mt-4">
+  <h2 class="mb-3">{{ isEditing ? "Editar" : "Nuevo" }} Producto</h2>
+
+  <form
+    (ngSubmit)="form.valid && save()"
+    #form="ngForm"
+    class="card p-4 shadow-sm"
+    novalidate
+  >
+    <div class="mb-3">
+      <label class="form-label">Nombre del Producto</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="product.name"
+        name="name"
+        required
+        minlength="1"
+        maxlength="150"
+        #name="ngModel"
+        [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+      />
+
+      <div class="invalid-feedback" *ngIf="name.errors?.['required']">
+        El nombre es obligatorio.
+      </div>
+      <div class="invalid-feedback" *ngIf="name.errors?.['maxlength']">
+        Máximo 150 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">SKU</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="product.sku"
+        name="sku"
+        required
+        minlength="3"
+        maxlength="50"
+        #sku="ngModel"
+        [class.is-invalid]="sku.invalid && (sku.dirty || sku.touched)"
+      />
+
+      <div class="invalid-feedback" *ngIf="sku.errors?.['required']">
+        El SKU es obligatorio.
+      </div>
+      <div class="invalid-feedback" *ngIf="sku.errors?.['minlength']">
+        El SKU debe tener al menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Precio</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="product.price"
+        name="price"
+        required
+        min="0"
+        #price="ngModel"
+        [class.is-invalid]="price.invalid && (price.dirty || price.touched)"
+      />
+
+      <div class="invalid-feedback" *ngIf="price.errors?.['required']">
+        El precio es obligatorio.
+      </div>
+      <div class="invalid-feedback" *ngIf="price.errors?.['min']">
+        El precio no puede ser negativo.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dueño (Persona)</label>
+      <select
+        class="form-select"
+        [(ngModel)]="product.owner"
+        name="owner"
+        required
+        #owner="ngModel"
+        [class.is-invalid]="owner.invalid && (owner.dirty || owner.touched)"
+      >
+        <option value="" disabled selected>Seleccione un dueño</option>
+        <option *ngFor="let p of persons" [value]="p.id">
+          {{ p.first_name }} {{ p.last_name }} ({{ p.email }})
+        </option>
+      </select>
+
+      <div class="invalid-feedback">
+        Debes seleccionar un dueño para el producto.
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button
+        type="submit"
+        class="btn btn-success flex-grow-1"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+      <a routerLink="/products" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>

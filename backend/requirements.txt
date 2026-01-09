@@ -1,0 +1,10 @@
+django
+djangorestframework
+psycopg2-binary
+django-cors-headers
+python-dotenv
+gunicorn
+django-filter
+drf-spectacular
+djangorestframework-simplejwt
+django-prometheus

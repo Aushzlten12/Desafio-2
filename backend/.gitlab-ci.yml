@@ -1,0 +1,25 @@
+image: python:3.12
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+stages:
+  - quality
+  - test
+
+linting:
+  stage: quality
+  script:
+    - pip install black ruff
+    - black --check .
+    - ruff check .
+
+testing:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - python manage.py test api

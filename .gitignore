@@ -1,0 +1,6 @@
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Entornos locales de docker 
+postgres_data/

@@ -1,0 +1,40 @@
+# --- GENERAL & SO ---
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# --- PYTHON (Backend) ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos Virtuales (CRÍTICO)
+venv/
+.venv/
+env/
+.env
+.env.*
+
+# Base de datos local (por si usas sqlite fuera de docker)
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos estáticos y media
+/backend_desafio/static/
+/backend_desafio/media/
+/backend_desafio/staticfiles/
+
+# Testing y Cobertura (Coverage)
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+
+postgres_data/
+
+.env
+**/.env
+
+pyrightconfig.json

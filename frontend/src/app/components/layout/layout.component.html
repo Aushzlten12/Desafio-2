@@ -1,0 +1,23 @@
+<nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between">
+  <div class="d-flex align-items-center">
+    <a class="navbar-brand" href="#">Mi Sistema</a>
+
+    <span class="text-light ms-3 small d-flex align-items-center">
+      <span
+        class="status-dot"
+        [ngClass]="isBackendOnline ? 'online' : 'offline'"
+      ></span>
+      {{ isBackendOnline ? "Sistema Online" : "Sin Conexión" }}
+      <span class="text-light ms-3"
+        >Hola, <strong>{{ currentUser }}</strong></span
+      >
+    </span>
+  </div>
+
+  <button class="btn btn-outline-light btn-sm" (click)="logout()">
+    Cerrar Sesión
+  </button>
+</nav>
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
