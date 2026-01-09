@@ -49,11 +49,19 @@ Para evitar escribir comandos largos de Docker repetitivamente, se incluye un ar
 | `make migrations` | Ejecuta `makemigrations` y `migrate` dentro del contenedor. |
 | `make superuser` | Crea un superusuario para entrar al panel de administración. |
 | `make shell-back` | Abre una terminal dentro del contenedor de Django. |
-| `make clean-data` | ⚠️ **Borra la base de datos** y volúmenes. Deja el sistema como nuevo. |
+| `make clean-data` | **Borra la base de datos** y volúmenes. Deja el sistema como nuevo. |
 
 ---
 
-## 🏁 Guía de Inicio Rápido
+### Utilidades de Frontend
+
+| Comando | Acción |
+| :--- | :--- |
+| `make lint-front` | Ejecuta `npm run lint`. |
+| `make fmt-front` | Ejecuta `prettier` en los archivos del frontend. |
+| `make test-front` | Ejecuta los `test` del frontend. |
+
+## Guía de Inicio Rápido
 
 ### 1. Requisitos Previos
 * Tener instalado **Docker** y **Docker Desktop**.
@@ -74,3 +82,4 @@ make migrations
 
 # 3. Crear un usuario administrador (opcional)
 make superuser
+```

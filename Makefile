@@ -59,3 +59,16 @@ shell-back: ## Entra a la terminal del contenedor de Backend
 clean-data: 
 	$(DOCKER_COMPOSE) down -v
 	@echo "🗑️  Volúmenes borrados. Sistema como nuevo."
+
+# -----------------------------------------------------------------------------
+# TEST - LINT
+# -----------------------------------------------------------------------------
+
+lint-front: ## Revisa errores de código en Angular 
+	cd frontend && npm run lint
+
+fmt-front: ## Formatea el código de Angular (Prettier)
+	cd frontend && npx prettier --write "src/**/*.{ts,html,scss,css}"
+
+test-front: ## Corre los tests de Angular (Karma/Jasmine)
+	cd frontend && npm run test -- --watch=false --browsers=ChromeHeadless
