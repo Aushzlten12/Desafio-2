@@ -1,10 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { PersonListComponent } from './person-list.component';
 import { ApiService } from '../../services/api.service';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // Necesario para ngModel
+import Swal from 'sweetalert2';
 
 describe('PersonListComponent', () => {
   let component: PersonListComponent;
@@ -85,16 +86,18 @@ describe('PersonListComponent', () => {
     expect(args.page).toBe(2);
   });
 
-  it('debería eliminar una persona si el usuario confirma', () => {
-    // Simulamos que window.confirm devuelve TRUE
-    spyOn(window, 'confirm').and.returnValue(true);
-    apiServiceSpy.deletePerson.and.returnValue(of({})); // Respuesta vacía exitosa
+  it('debería eliminar una persona si el usuario confirma', fakeAsync(() => {
+    spyOn(Swal, 'fire').and.returnValue(Promise.resolve({ isConfirmed: true } as any));
+
+    apiServiceSpy.deletePerson.and.returnValue(of({}));
 
     component.deletePerson('1');
 
-    expect(window.confirm).toHaveBeenCalled();
+    tick();
+    fixture.detectChanges();
+
+    expect(Swal.fire).toHaveBeenCalled();
     expect(apiServiceSpy.deletePerson).toHaveBeenCalledWith('1');
-    // Debería recargar la lista después de borrar
-    expect(apiServiceSpy.getPersons).toHaveBeenCalledTimes(2); // 1 al inicio + 1 al borrar
-  });
+    expect(apiServiceSpy.getPersons).toHaveBeenCalledTimes(2);
+  }));
 });
