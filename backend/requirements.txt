@@ -11,3 +11,4 @@ django-prometheus
 coverage>=7.0.0
 ruff
 black
+python-json-logger

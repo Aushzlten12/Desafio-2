@@ -180,17 +180,30 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {
-            # Formato tipo key=value para fácil parseo
-            "format": '{levelname} time={asctime} module={module} message="{message}"',
-            "style": "{",
+        "json": {
+            "()": "pythonjsonlogger.jsonlogger.JsonFormatter",
+            # Aquí definimos qué campos queremos ver en el JSON
+            "format": "%(asctime)s %(levelname)s %(name)s %(message)s",
+            "datefmt": "%Y-%m-%dT%H:%M:%SZ",
         },
     },
     "handlers": {
         "console": {
             "level": os.environ.get("LOG_LEVEL", "INFO"),
             "class": "logging.StreamHandler",
-            "formatter": "verbose",
+            "formatter": "json",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "core": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": True,
         },
     },
     "root": {
